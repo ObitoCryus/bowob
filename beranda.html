@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+  <body>
+    <tr><br><h1 class ="text-center " id="judul">Jadwal Pertemuan obito</h1><br></tr>
+    <div class="row">
+        <div class="col-4">
+            <label for="select2">Pilih Hari</label>
+            <select name="select2" id="hari" multiple class="form-select">
+                <option value="Senin">Senin</option>
+                <option value="Selasa">Selasa</option>
+                <option value="Rabu">Rabu</option>
+                <option value="Kamis">Kamis</option>
+                <option value="Jumat">Jumat</option>
+                <option value="Sabtu">Sabtu</option>
+                <option value="Minggu">Minggu</option>
+
+            </select>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-lg-4">
+            <Label for="">Pertemuan</Label>
+            <input type="number" id="jumlah_hari" name="lname" multiple class="form-select">
+        </div>
+    </div>
+        
+
+        <div class="col-lg-4">
+            <Label for="">Tanggal</Label>
+            <input type="date" id="tanggal" multiple class="form-select">
+        </div>
+
+        <div class="col-lg-3">
+            <button class="btn mt-4 btn-secondary" id="btn_tampil">Tampilkan</button>
+        </div>     
+
+    </div>
+    <div class="row">
+        <p>Hasil:</p>
+        <div id="hasil"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#hari').select2()
+        console.log('asdasd');
+
+
+
+        $('#btn_tampil').click(function () { 
+           $('#judul').text("hasil jadwal pertemuan");             
+            
+           let day_selected     = $('#hari').val();
+           let limit            = $('#jumlah_hari').val();
+           let start_date       = $('#tanggal').val();
+           console.log(day_selected);
+           console.log(limit);
+           console.log(start_date);
+
+          Tampilkan(limit, start_date, day_selected)
+        })
+
+
+
+
+    });
+    function Tampilkan(limit, start_date, hari) {
+        let count = 0;
+        let nama_hari = ["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+        let format = '';
+        let result = [];
+        let tanggal= new Date(start_date);
+        let date_hari ='';
+
+        console.log(tanggal)
+        console.log(tanggal.getDate());
+        console.log(tanggal.getMonth());
+        console.log(tanggal.getDay());
+
+            while (limit > count) {
+                date_hari =  tanggal.getDay();
+                let hari_ini = nama_hari[date_hari];
+                    if (hari.includes(hari_ini)){
+                        format = hari_ini+ ", " + tanggal.getDate() + "-" + (tanggal.getMonth()+1) + "-"+ tanggal.getFullYear(); 
+                        result.push(format)
+                        $("p").append(`<br><label for="">${format}</label>`); 
+                        count += 1
+                    }
+                    tanggal.setDate(tanggal.getDate() + 1 ) ;
+                    console.log(tanggal);
+                    console.log(tanggal.getMonth());
+
+
+            } 
+                
+             console.log(result)
+        
+    } 
+    
+
+
+
+
+
+   
+
+</script>
+        
+</body>
+
+</html>
